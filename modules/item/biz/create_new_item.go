@@ -2,6 +2,7 @@ package biz
 
 import (
 	"context"
+	"myginapp/common"
 	"myginapp/modules/item/model"
 	"strings"
 )
@@ -27,7 +28,7 @@ func (biz *createItemBiz) CreateNewItem(ctx context.Context, data *model.TodoIte
 	}
 
 	if err := biz.store.InsertItem(ctx, data); err != nil {
-		return err
+		return common.ErrCannotCreateEntity(model.EntityName, err)
 	}
 
 	return nil

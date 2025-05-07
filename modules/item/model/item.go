@@ -5,6 +5,10 @@ import (
 	"myginapp/common"
 )
 
+const (
+	EntityName = "Item"
+)
+
 var (
 	ErrTitleIsBlank = errors.New("Title can not be blank!")
 	ErrItemDeleted  = errors.New("Item is deleted!")
@@ -21,7 +25,7 @@ func (TodoItem) TableName() string { return "Todo_items" }
 
 type TodoItemCreation struct {
 	Id          int         `JSON:"-" gorm:"column:id;"`
-	Title       string      `JSON:"title" gorm:"column:title;"`
+	Title       string      `JSON:"title" gorm:"column:titlee;"`
 	Description string      `JSON:"description" gorm:"column:description;"`
 	Status      *ItemStatus `JSON:"status" gorm:"column:status;"`
 }
