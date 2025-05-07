@@ -10,9 +10,9 @@ import (
 type ItemStatus int
 
 const (
-	itemStatusDoing ItemStatus = iota
-	itemStatusDone
-	itemStatusDeleted
+	ItemStatusDoing ItemStatus = iota
+	ItemStatusDone
+	ItemStatusDeleted
 )
 
 var allItemStatuses = [3]string{"Doing", "Done", "Deleted"}
