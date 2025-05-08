@@ -18,7 +18,7 @@ func (s *sqlStore) ListItem(ctx context.Context, filter *model.Filter, paging *c
 		}
 	}
 	if err := db.Table(model.TodoItem{}.TableName()).Count(&paging.Total).Error; err != nil {
-		return nil, err
+		return nil, common.ErrDB(err)
 	}
 
 	if err := db.Order("id asc").
@@ -26,7 +26,7 @@ func (s *sqlStore) ListItem(ctx context.Context, filter *model.Filter, paging *c
 		Limit(paging.Limit).
 		Find(&result).Error; err != nil {
 
-		return nil, err
+		return nil, common.ErrDB(err)
 	}
 
 	return result, nil

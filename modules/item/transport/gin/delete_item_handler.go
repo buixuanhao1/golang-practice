@@ -16,17 +16,13 @@ func DeleteItem(db *gorm.DB) func(*gin.Context) {
 		idStr := c.Param("id")
 		id, err := strconv.Atoi(idStr)
 		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{
-				"error path parameter": err.Error(),
-			})
+			c.JSON(http.StatusBadRequest, common.ErrInvalidRequest(err))
 			return
 		}
 		store := storage.NewSqlStore(db)
 		business := biz.NewDeleteItemBiz(store)
 		if err := business.DeleteItemById(c.Request.Context(), id); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{
-				"error ": err.Error(),
-			})
+			c.JSON(http.StatusBadRequest, err)
 			return
 		}
 		// gin.H{

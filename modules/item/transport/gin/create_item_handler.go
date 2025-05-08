@@ -1,6 +1,7 @@
 package ginItem
 
 import (
+	"fmt"
 	"myginapp/common"
 	"myginapp/modules/item/biz"
 	"myginapp/modules/item/model"
@@ -19,6 +20,9 @@ func CreateItem(db *gorm.DB) func(*gin.Context) {
 			c.JSON(http.StatusBadRequest, common.ErrInvalidRequest(err))
 			return
 		}
+
+		requester := c.MustGet(common.CurrentUser).(common.Requester)
+		data.UserId = requester.GetUserId()
 		store := storage.NewSqlStore(db)
 		business := biz.NewCreateItemBiz(store)
 
@@ -29,6 +33,7 @@ func CreateItem(db *gorm.DB) func(*gin.Context) {
 		// gin.H{
 		// 	"data": data.Id,
 		// }
+		fmt.Print("alooo")
 		c.JSON(http.StatusAccepted, common.SimpleSuccessResponse(data.Id))
 
 	}

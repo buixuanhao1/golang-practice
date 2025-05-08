@@ -16,6 +16,7 @@ var (
 
 type TodoItem struct {
 	common.SQLModel
+	UserId      int         `json:"user_id" gorm:"column:user_id"`
 	Title       string      `JSON:"title" gorm:"column:title;"`
 	Description string      `JSON:"description" gorm:"column:description;"`
 	Status      *ItemStatus `JSON:"status" gorm:"column:status;"`
@@ -25,7 +26,8 @@ func (TodoItem) TableName() string { return "Todo_items" }
 
 type TodoItemCreation struct {
 	Id          int         `JSON:"-" gorm:"column:id;"`
-	Title       string      `JSON:"title" gorm:"column:titlee;"`
+	UserId      int         `json:"-" gorm:"column:user_id"`
+	Title       string      `JSON:"title" gorm:"column:title;"`
 	Description string      `JSON:"description" gorm:"column:description;"`
 	Status      *ItemStatus `JSON:"status" gorm:"column:status;"`
 }
